@@ -229,7 +229,7 @@ const projects = [
     tech: ["React", "Next.js", "Three.js", "Tailwind"],
     link: "https://polystudy.vercel.app/",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/polystudy.png?token=GHSAT0AAAAAADYMDMRRSMYMYE77P7DYX3BA2PNXFHQ",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/polystudy.png?token=GHSAT0AAAAAADZ3GCMXLMXCIQ5FN3JJYDIK2PONHTA",
   },
   {
     id: "calicutstore",
@@ -241,7 +241,7 @@ const projects = [
     tech: ["Next.js", "Stripe", "Framer Motion", "GSAP"],
     link: "https://calicutstore.vercel.app/",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/calicut.png?token=GHSAT0AAAAAADYMDMRRDHSKBEUO3NSSXPOO2PNXF3Q",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/calicut.png?token=GHSAT0AAAAAADZ3GCMXYAUC2CO6NZV32NOG2PONJLQ",
   },
   {
     id: "chaliyam",
@@ -253,7 +253,7 @@ const projects = [
     tech: ["React", "Firebase", "Node.js", "Socket.io"],
     link: "https://chaliyam.vercel.app",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/chaliyam.png?token=GHSAT0AAAAAADYMDMRQSXHGEZW56CCC2AIK2PNXGXA",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/chaliyam.png?token=GHSAT0AAAAAADZ3GCMWZWYTFY7FJ74BUR6E2PONJ5A",
   },
 ];
 
