@@ -20,19 +20,7 @@ export default defineConfig(({mode}) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
-      target: "esnext",
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('three') || id.includes('@react-three')) return 'threejs';
-              if (id.includes('react') || id.includes('eslint')) return 'react';
-              if (id.includes('gsap') || id.includes('lenis')) return 'animation';
-              return 'vendor';
-            }
-          }
-        }
-      }
+      target: "esnext"
     }
   };
 });
