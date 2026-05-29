@@ -3,11 +3,16 @@ import { useProgress } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function Preloader() {
-  const { progress: realProgress } = useProgress();
+  const { progress: realProgress, active } = useProgress();
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(true);
 
   useEffect(() => {
+    // Timeout fallback just in case
+    const fallbackTimer = setTimeout(() => {
+      setProgress(100);
+    }, 1500);
+
     // Artificial smooth loading logic to mask WebGL compilation lag
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -15,13 +20,14 @@ export function Preloader() {
         const artificialTarget = Math.min(prev + 5, 99);
         let nextProgress = Math.max(artificialTarget, prev);
         
-        // Once actual Three.js scene is fully loaded (100%), accelerate to 100% swiftly
-        if (realProgress === 100) {
+        // Once actual Three.js scene is fully loaded (100%) or no longer active, accelerate
+        if (realProgress === 100 || (!active && prev > 10)) {
           nextProgress = prev + 15;
         }
         
         if (nextProgress >= 100) {
           clearInterval(interval);
+          clearTimeout(fallbackTimer);
           return 100;
         }
         
@@ -29,8 +35,11 @@ export function Preloader() {
       });
     }, 16); // ~60fps target tick rate
     
-    return () => clearInterval(interval);
-  }, [realProgress]);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(fallbackTimer);
+    };
+  }, [realProgress, active]);
 
   useEffect(() => {
     // Hold at 100% for a brief moment before dismissing the loading screen

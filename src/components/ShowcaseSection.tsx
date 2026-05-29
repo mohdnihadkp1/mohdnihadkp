@@ -8,7 +8,14 @@ export function ShowcaseSection() {
     const [previewDoc, setPreviewDoc] = useState<{url: string, title: string} | null>(null);
 
     return (
-        <section id="showcase" className="relative w-full py-24 md:py-32 px-4 md:px-12 lg:px-24 pointer-events-none">
+        <section 
+            id="showcase" 
+            className="relative w-full py-24 md:py-32 md:px-12 lg:px-24 pointer-events-none"
+            style={{
+                paddingLeft: "max(1rem, env(safe-area-inset-left))",
+                paddingRight: "max(1rem, env(safe-area-inset-right))"
+            }}
+        >
             <div className="pointer-events-auto max-w-5xl mx-auto z-10 relative">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -92,9 +99,9 @@ export function ShowcaseSection() {
                                         </button>
                                     </div>
 
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                         {/* Core Skills */}
-                                        <div>
+                                        <div className="col-span-1 md:col-span-2">
                                             <h3 className="text-lg md:text-xl font-display font-medium text-white mb-6">Expertise Matrix</h3>
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <SkillCard 
@@ -121,7 +128,7 @@ export function ShowcaseSection() {
                                         </div>
 
                                         {/* Certificates */}
-                                        <div>
+                                        <div className="col-span-1 md:col-span-2">
                                             <h3 className="text-lg md:text-xl font-display font-medium text-white mb-6">Credentials Gallery</h3>
                                             <div className="space-y-4">
                                                 <CertCard 

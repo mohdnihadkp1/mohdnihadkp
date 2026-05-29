@@ -30,6 +30,8 @@ import { Preloader } from "./components/Preloader";
 import { CVPreview } from "./components/CVPreview";
 import { TechSphere } from "./components/TechSphere";
 import { ShowcaseSection } from "./components/ShowcaseSection";
+import Lottie from "lottie-react";
+import mobileBgAnimation from "./components/mobile-bg.json";
 
 function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -294,7 +296,7 @@ const projects = [
     tech: ["React", "Next.js", "Three.js", "Tailwind"],
     link: "https://polystudy.vercel.app/",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/polystudy.png?token=GHSAT0AAAAAADYMDMRRSMYMYE77P7DYX3BA2PNXFHQ",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/polystudy.png",
   },
   {
     id: "calicutstore",
@@ -306,7 +308,7 @@ const projects = [
     tech: ["Next.js", "Stripe", "Framer Motion", "GSAP"],
     link: "https://calicutstore.vercel.app/",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/calicut.png?token=GHSAT0AAAAAADYMDMRRDHSKBEUO3NSSXPOO2PNXF3Q",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/calicut.png",
   },
   {
     id: "chaliyam",
@@ -318,7 +320,7 @@ const projects = [
     tech: ["React", "Firebase", "Node.js", "Socket.io"],
     link: "https://chaliyam.vercel.app",
     image:
-      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/chaliyam.png?token=GHSAT0AAAAAADYMDMRQSXHGEZW56CCC2AIK2PNXGXA",
+      "https://raw.githubusercontent.com/mohdnihadkp1/GALLERY/refs/heads/main/icon_of_chaliyam_connect/chaliyam.png",
   },
 ];
 
@@ -456,13 +458,15 @@ export default function App() {
           {/* 3D WebGL Layer - Fixed Background */}
           <div className="fixed inset-0 z-0 pointer-events-none">
             {isMobile || prefersReducedMotion ? (
-              // Gradient fallback for mobile & prefers-reduced-motion
+              // Lottie fallback for mobile & prefers-reduced-motion
               <div 
-                className="absolute inset-0 z-0" 
+                className="absolute inset-0 z-0 flex items-center justify-center opacity-30 select-none pointer-events-none" 
                 style={{
                   background: "radial-gradient(circle at 50% 50%, #1a1a2e 0%, #030303 100%)"
                 }}
-              />
+              >
+                <Lottie animationData={mobileBgAnimation} loop={true} className="w-full h-full max-w-2xl blur-3xl opacity-50" />
+              </div>
             ) : (
               <ErrorBoundary
                 fallback={<div className="fixed inset-0 z-0 bg-[#030303]"></div>}
@@ -641,7 +645,7 @@ export default function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-10%" }}
                       transition={{ duration: 0.6, delay: idx * 0.1 }}
-                      className="snap-center w-full"
+                      className="snap-start w-full"
                     >
                       <div
                         className="glass-card p-4 md:p-8 group flex flex-col h-auto w-full text-left rounded-[16px] md:rounded-[32px] overflow-hidden"
