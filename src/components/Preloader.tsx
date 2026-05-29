@@ -11,13 +11,13 @@ export function Preloader() {
     // Artificial smooth loading logic to mask WebGL compilation lag
     const interval = setInterval(() => {
       setProgress((prev) => {
-        // Slowly tick up artificially to max out at 99%
-        const artificialTarget = Math.min(prev + 1.2, 99);
+        // Faster artificial tick to max out at 99%
+        const artificialTarget = Math.min(prev + 5, 99);
         let nextProgress = Math.max(artificialTarget, prev);
         
         // Once actual Three.js scene is fully loaded (100%), accelerate to 100% swiftly
         if (realProgress === 100) {
-          nextProgress = prev + 3;
+          nextProgress = prev + 15;
         }
         
         if (nextProgress >= 100) {
@@ -33,9 +33,9 @@ export function Preloader() {
   }, [realProgress]);
 
   useEffect(() => {
-    // Hold at 100% for a split second before dismissing the loading screen
+    // Hold at 100% for a brief moment before dismissing the loading screen
     if (progress === 100) {
-      const timer = setTimeout(() => setShow(false), 600);
+      const timer = setTimeout(() => setShow(false), 200);
       return () => clearTimeout(timer);
     }
   }, [progress]);
