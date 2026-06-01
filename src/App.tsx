@@ -375,6 +375,20 @@ function GSAPSync() {
   return null;
 }
 
+function ScrollLock({ isLocked }: { isLocked: boolean }) {
+  const lenis = useLenis();
+  useEffect(() => {
+    if (isLocked) {
+      if (lenis) lenis.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      if (lenis) lenis.start();
+      document.body.style.overflow = "auto";
+    }
+  }, [isLocked, lenis]);
+  return null;
+}
+
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
@@ -431,6 +445,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <ReactLenis root>
+        <ScrollLock isLocked={!!selectedProject || showCV} />
         <GSAPSync />
         <Preloader />
         <div
@@ -732,7 +747,7 @@ export default function App() {
 
                 <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-6 pb-6 md:pb-0 mb-8 md:mb-12 w-full max-w-2xl mx-auto px-4 justify-start md:justify-center">
                   {[
-                    { icon: <Mail className="w-6 h-6 md:w-5 md:h-5" />, label: "Email", href: "mailto:hello@example.com" },
+                    { icon: <Mail className="w-6 h-6 md:w-5 md:h-5" />, label: "Email", href: "mailto:mohdnihadkp@example.com" },
                     { icon: <Github className="w-6 h-6 md:w-5 md:h-5" />, label: "GitHub", href: "https://github.com/mohdnihadkp" },
                     { icon: <Linkedin className="w-6 h-6 md:w-5 md:h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/mohdnihadkp" },
                     { icon: <Instagram className="w-6 h-6 md:w-5 md:h-5" />, label: "Instagram", href: "https://www.instagram.com/mohdnihadkp" },
@@ -760,7 +775,7 @@ export default function App() {
                 {/* Mobile fixed Email Me button (only visible on mobile, positioned above the bottom tabs) */}
                 <div className="md:hidden fixed bottom-[96px] left-[16px] right-[16px] z-[90]">
                   <a
-                    href="mailto:hello@example.com"
+                    href="mailto:mohdnihadkp@example.com"
                     className="flex items-center justify-center gap-2 w-full h-[48px] bg-emerald-500 text-bg font-mono text-[16px] font-bold uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 transition-transform"
                   >
                     Email Me
@@ -795,8 +810,9 @@ export default function App() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-3xl glass-card rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-2xl overflow-y-auto max-h-[90vh]"
+                className="relative w-full max-w-3xl glass-card rounded-[24px] md:rounded-[32px] p-6 md:p-12 shadow-2xl overflow-y-auto max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
+                data-lenis-prevent="true"
               >
                 <button
                   onClick={() => setSelectedProject(null)}
