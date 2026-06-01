@@ -747,7 +747,7 @@ export default function App() {
 
                 <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-6 pb-6 md:pb-0 mb-8 md:mb-12 w-full max-w-2xl mx-auto px-4 justify-start md:justify-center">
                   {[
-                    { icon: <Mail className="w-6 h-6 md:w-5 md:h-5" />, label: "Email", href: "mailto:mohdnihadkp@example.com" },
+                    { icon: <Mail className="w-6 h-6 md:w-5 md:h-5" />, label: "Email", href: "mailto:mohdnihadkp@gmail.com" },
                     { icon: <Github className="w-6 h-6 md:w-5 md:h-5" />, label: "GitHub", href: "https://github.com/mohdnihadkp" },
                     { icon: <Linkedin className="w-6 h-6 md:w-5 md:h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/mohdnihadkp" },
                     { icon: <Instagram className="w-6 h-6 md:w-5 md:h-5" />, label: "Instagram", href: "https://www.instagram.com/mohdnihadkp" },
@@ -775,7 +775,7 @@ export default function App() {
                 {/* Mobile fixed Email Me button (only visible on mobile, positioned above the bottom tabs) */}
                 <div className="md:hidden fixed bottom-[96px] left-[16px] right-[16px] z-[90]">
                   <a
-                    href="mailto:mohdnihadkp@example.com"
+                    href="mailto:mohdnihadkp@gmail.com"
                     className="flex items-center justify-center gap-2 w-full h-[48px] bg-emerald-500 text-bg font-mono text-[16px] font-bold uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 transition-transform"
                   >
                     Email Me
