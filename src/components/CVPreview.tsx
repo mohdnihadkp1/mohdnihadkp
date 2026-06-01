@@ -147,7 +147,7 @@ export function CVPreview({
         </div>
 
         {/* Content Wrapper */}
-        <div className="relative flex-1 overflow-y-auto custom-scrollbar flex flex-col items-center justify-start p-4 sm:p-8">
+        <div className="relative flex-1 overflow-y-auto custom-scrollbar flex flex-col items-center justify-start p-4 sm:p-8" data-lenis-prevent="true">
           {/* Inner CRT Scanline Overlay over PDF */}
           <div className="absolute inset-0 pointer-events-none crt-scanline opacity-10 mix-blend-overlay z-[60]" />
           
