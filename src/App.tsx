@@ -751,7 +751,7 @@ export default function App() {
                     { icon: <Github className="w-6 h-6 md:w-5 md:h-5" />, label: "GitHub", href: "https://github.com/mohdnihadkp" },
                     { icon: <Linkedin className="w-6 h-6 md:w-5 md:h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/mohdnihadkp" },
                     { icon: <Instagram className="w-6 h-6 md:w-5 md:h-5" />, label: "Instagram", href: "https://www.instagram.com/mohdnihadkp" },
-                    { icon: <Twitter className="w-6 h-6 md:w-5 md:h-5" />, label: "X", href: "https://x.com/mohdnihadkp?t=6AuEYXj5pzlWX6RVQ91Xcw&s=09" },
+                    { icon: <Twitter className="w-6 h-6 md:w-5 md:h-5" />, label: "X", href: "https://drive.google.com/file/d/1I3xkNY3UucLe2T9bMvOpIzIrp1lrV0_W/view?usp=drivesdk" },
                     { icon: <AtSign className="w-6 h-6 md:w-5 md:h-5" />, label: "Threads", href: "https://www.threads.com/@mohdnihadkp" },
                     { icon: <Pin className="w-6 h-6 md:w-5 md:h-5" />, label: "Pinterest", href: "https://pin.it/4SKTJurgS" },
                     { icon: <Globe className="w-6 h-6 md:w-5 md:h-5" />, label: "Portfolio", href: "https://mohdnihadkp.vercel.app" }
