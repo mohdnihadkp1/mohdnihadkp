@@ -8,11 +8,10 @@ import { motion } from 'framer-motion';
 
 export default function BentoBox() {
   const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
-      y: 0, 
-      transition: { type: 'spring', stiffness: 200, damping: 20 }
+      transition: { duration: 0.6, ease: "easeOut" }
     }
   };
 
@@ -25,7 +24,7 @@ export default function BentoBox() {
             className={`${styles.bentoCard} ${styles.card1}`}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
             variants={cardVariants}
           >
             <Image 
@@ -46,7 +45,7 @@ export default function BentoBox() {
             className={`${styles.bentoCard} ${styles.card2}`}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
             variants={cardVariants}
           >
             <div className={styles.cardContent}>
@@ -89,7 +88,7 @@ export default function BentoBox() {
             className={`${styles.bentoCard} ${styles.card3}`}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
             variants={cardVariants}
           >
             <div className={styles.videoContainer}>

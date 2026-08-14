@@ -195,22 +195,25 @@
 
 @media (max-width: 768px) {
   .songGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr; /* Single column list */
     gap: 12px;
   }
   .songCard {
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem;
+    flex-direction: row; /* Horizontal layout for list style */
+    text-align: left;
+    padding: 12px 16px;
     align-items: center;
   }
   .cardArtwork {
-    margin-right: 0;
-    margin-bottom: 0.75rem;
+    margin-right: 16px;
+    margin-bottom: 0;
+    width: 44px;
+    height: 44px;
   }
   .cardActions {
-    padding-left: 0;
-    margin-top: 0.5rem;
+    padding-left: 12px;
+    margin-top: 0;
+    margin-left: auto; /* Push actions to the far right */
   }
   .cardTags {
     display: none;
