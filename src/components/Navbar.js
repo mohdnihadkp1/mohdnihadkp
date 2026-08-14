@@ -21,7 +21,6 @@ export default function Navbar() {
           <Link href="/services" className={pathname === '/services' ? styles.active : ''}>Services</Link>
           <Link href="/shop" className={pathname === '/shop' ? styles.active : ''}>Store</Link>
           <Link href="/blog" className={pathname === '/blog' ? styles.active : ''}>Blog</Link>
-          <Link href="/music" className={styles.musicLink}>Music Player</Link>
         </div>
       </div>
     </nav>

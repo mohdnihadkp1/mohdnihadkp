@@ -70,6 +70,13 @@ export default function Hero() {
             Let's Talk Business
           </Link>
         </motion.div>
+
+        <motion.div variants={itemVariants} className={styles.keywords}>
+          <span>Explore:</span>
+          <Link href="/blog" className={styles.keyword}>Blogs</Link>
+          <Link href="/services" className={styles.keyword}>Services</Link>
+          <Link href="/shop" className={styles.keyword}>Store</Link>
+        </motion.div>
       </motion.div>
     </section>
   );
