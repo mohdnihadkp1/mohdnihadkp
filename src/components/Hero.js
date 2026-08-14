@@ -18,7 +18,7 @@ function InteractiveStars() {
   });
 
   return (
-    <Stars ref={starsRef} radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+    <Stars ref={starsRef} radius={100} depth={50} count={1500} factor={3} saturation={0} fade speed={1} />
   );
 }
 
@@ -46,7 +46,7 @@ export default function Hero() {
   return (
     <section className={styles.heroSection}>
       <div className={styles.canvasContainer}>
-        <Canvas camera={{ position: [0, 0, 1] }}>
+        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 1] }}>
           <InteractiveStars />
         </Canvas>
       </div>
