@@ -83,7 +83,7 @@ export default function BentoBox() {
             </div>
           </motion.div>
 
-          {/* Grid 3: Beyond Code (Auto-playing Video Style) */}
+          {/* Grid 3: Beyond Code (Auto-playing Video) */}
           <motion.div 
             className={`${styles.bentoCard} ${styles.card3}`}
             initial="hidden"
@@ -92,21 +92,18 @@ export default function BentoBox() {
             variants={cardVariants}
           >
             <div className={styles.videoContainer}>
-              {/* CSS Animated Playing Video Style */}
-              <Image 
-                src="/ai_video_thumbnail.jpg" 
-                alt="AI Video Creation" 
-                fill
+              <video 
+                src="/ai_video.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
                 className={styles.playingVideoImage}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
               <div className={styles.scanlines}></div>
               
               <div className={styles.videoContentOverlay}>
-                <span className={styles.liveBadge}>
-                  <span className={styles.pulsingDot}></span>
-                  LIVE: AI Video Generation
-                </span>
                 <h2 className={styles.videoTitleOverlay}>Visual Storyteller</h2>
               </div>
             </div>
