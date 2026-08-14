@@ -1,4 +1,5 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
@@ -13,6 +14,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata = {
   metadataBase: new URL('https://nihadkp.com'),
+  verification: {
+    google: "B2KZie4JZvyTNbSQoQCTbI0_NWloo5Lm2u6vY72XwTs",
+    other: {
+      "msvalidate.01": "336B5ED30780159A713E319A03D13D31",
+    },
+  },
   title: "Nihad KP | Digital Ventures & Business Solutions",
   description: "Portfolio of Mohammed Nihad KP - Building Scalable Digital Ventures & Strategic Business Solutions.",
   keywords: ["Nihad KP", "Digital Ventures", "Web Development", "App Development", "SEO", "Business Solutions", "Portfolio"],
@@ -150,6 +157,20 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        {/* Google Analytics */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-J26EYZM8E4" 
+          strategy="afterInteractive" 
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J26EYZM8E4');
+          `}
+        </Script>
+        
         <AmbientBackground />
         <ThemeProvider>
           <Navbar />
