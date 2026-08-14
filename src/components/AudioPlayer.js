@@ -12,6 +12,7 @@ export default function AudioPlayer() {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
   
   const currentSong = songs[currentSongIndex];
 
@@ -35,6 +36,7 @@ export default function AudioPlayer() {
           playPromise.catch(e => {
             if (e.name !== 'AbortError') {
               console.warn("Audio play failed:", e);
+              setIsBuffering(false);
             }
           });
         }
@@ -49,9 +51,6 @@ export default function AudioPlayer() {
       audioRef.current.volume = volume;
     }
   }, [volume]);
-
-  // Handle smooth crossfade-like pause/play on volume change (Optional advanced feature)
-  // For now, standard fast response is preferred.
 
   const togglePlay = (e) => {
     if(e) e.stopPropagation();
@@ -84,7 +83,11 @@ export default function AudioPlayer() {
   const handleError = (e) => {
     console.warn("Audio playback error: Source may be unsupported or blocked.", e);
     setIsPlaying(false);
+    setIsBuffering(false);
   };
+
+  const handleWaiting = () => setIsBuffering(true);
+  const handleCanPlay = () => setIsBuffering(false);
 
   const handleContainerClick = () => {
     if (!isExpanded) {
@@ -111,15 +114,26 @@ export default function AudioPlayer() {
     queueSongs.push(songs[(currentSongIndex + i) % songs.length]);
   }
 
+  // SVG Loader
+  const LoadingSpinner = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{animation: "spin 1s linear infinite"}}>
+      <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+    </svg>
+  );
+
   return (
     <>
       <audio 
         ref={audioRef} 
         src={audioSrc} 
+        preload="auto"
         onTimeUpdate={handleTimeUpdate}
         onEnded={nextSong}
         onLoadedMetadata={handleTimeUpdate}
         onError={handleError}
+        onWaiting={handleWaiting}
+        onPlaying={handleCanPlay}
+        onCanPlay={handleCanPlay}
       />
       
       <AnimatePresence>
@@ -153,16 +167,21 @@ export default function AudioPlayer() {
                   <div className={styles.miniArtist}>{currentSong.artist}</div>
                 </div>
                 
-                {isPlaying && (
+                {isPlaying && !isBuffering && (
                   <div className={styles.visualizer}>
                     {[1, 2, 3].map(i => <div key={i} className={`${styles.bar} ${styles.animating}`} />)}
+                  </div>
+                )}
+                {isBuffering && (
+                  <div style={{ marginRight: '16px', color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem' }}>
+                    Buffering...
                   </div>
                 )}
                 
                 <div className={styles.miniControls}>
                   <button className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); prevSong(); }}><SkipBack size={20} /></button>
                   <button className={styles.miniPlayBtn} onClick={togglePlay}>
-                    {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" style={{marginLeft: '2px'}} />}
+                    {isBuffering ? <LoadingSpinner /> : (isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" style={{marginLeft: '2px'}} />)}
                   </button>
                   <button className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); nextSong(); }}><SkipForward size={20} /></button>
                   <button className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); closePlayer(); }}><X size={20} /></button>
@@ -230,7 +249,7 @@ export default function AudioPlayer() {
                       <SkipBack size={32} fill="currentColor" />
                     </button>
                     <button className={styles.playPauseBtn} onClick={togglePlay}>
-                      {isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" style={{marginLeft: '4px'}} />}
+                      {isBuffering ? <LoadingSpinner /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" style={{marginLeft: '4px'}} />)}
                     </button>
                     <button className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); nextSong(); }}>
                       <SkipForward size={32} fill="currentColor" />
