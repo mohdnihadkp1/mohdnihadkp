@@ -1,0 +1,163 @@
+.caseStudiesSection {
+  padding: 5rem 2rem;
+  background-color: var(--bg-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(40px) saturate(250%);
+  -webkit-backdrop-filter: blur(40px) saturate(250%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cardHeader h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.block h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.block p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.techStack {
+  font-family: monospace;
+  background: rgba(var(--text-primary-rgb), 0.05);
+  padding: 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+  border: 1px solid var(--border-color);
+}
+
+.walkthrough {
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.videoPlaceholder {
+  height: 180px;
+  background-color: var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.viewLink {
+  align-self: flex-start;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.viewLink:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .caseStudiesSection {
+    padding: 3rem 1rem;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .cardHeader {
+    padding: 1rem 1rem 0.75rem;
+  }
+  .cardHeader h3 {
+    font-size: 1.1rem;
+  }
+  .subtitle {
+    font-size: 0.75rem;
+  }
+  .content {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .block h4 {
+    font-size: 0.85rem;
+  }
+  .block p {
+    font-size: 0.8rem;
+  }
+  .walkthrough {
+    padding: 0 1rem 1rem;
+  }
+  .videoPlaceholder {
+    height: 120px;
+    font-size: 0.8rem;
+  }
+}

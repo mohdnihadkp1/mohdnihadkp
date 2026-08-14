@@ -1,0 +1,210 @@
+.servicesContainer {
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+.header {
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: color 0.2s ease;
+  flex: 1;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+}
+
+.titleArea {
+  text-align: center;
+  flex: 2;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.main .container {
+  flex-direction: column;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  align-items: stretch;
+}
+
+.noticeBox, .freeHelpBox {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(40px) saturate(250%);
+  -webkit-backdrop-filter: blur(40px) saturate(250%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.freeHelpBox {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
+.noticeBox h3, .freeHelpBox h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.noticeBox p, .freeHelpBox p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.noticeBox strong {
+  color: var(--accent-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.serviceCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(40px) saturate(250%);
+  -webkit-backdrop-filter: blur(40px) saturate(250%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(var(--text-primary-rgb), 0.05);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.serviceTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.serviceDesc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.hireBtn, .contactBtn {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+  text-align: center;
+}
+
+.contactBtn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+.hireBtn:hover, .contactBtn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 0;
+  }
+  .header .container {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .main .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .noticeBox, .freeHelpBox {
+    padding: 1.5rem;
+  }
+  .grid {
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .serviceCard {
+    padding: 1rem;
+  }
+  .iconContainer {
+    margin-bottom: 1rem;
+  }
+  .serviceTitle {
+    font-size: 1rem;
+  }
+  .serviceDesc {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .hireBtn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}

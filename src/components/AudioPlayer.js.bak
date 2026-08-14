@@ -1,0 +1,177 @@
+"use client";
+
+import React, { useRef, useEffect, useState, useMemo } from 'react';
+import { useMusicStore } from '../store/musicStore';
+import styles from './AudioPlayer.module.css';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Repeat, Shuffle, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function AudioPlayer() {
+  const audioRef = useRef(null);
+  const { songs, currentSongIndex, isPlaying, volume, isPlayerVisible, setIsPlaying, nextSong, prevSong, setVolume, closePlayer } = useMusicStore();
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  const currentSong = songs[currentSongIndex];
+
+  // Generate a deterministic gradient color based on the song title
+  const themeColors = useMemo(() => {
+    if (!currentSong) return { from: '#450af5', to: '#c4efd9' };
+    let hash = 0;
+    for (let i = 0; i < currentSong.title.length; i++) {
+      hash = currentSong.title.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const color1 = `hsl(${Math.abs(hash) % 360}, 80%, 60%)`;
+    const color2 = `hsl(${(Math.abs(hash) + 40) % 360}, 80%, 40%)`;
+    return { from: color1, to: color2 };
+  }, [currentSong]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(e => {
+            if (e.name !== 'AbortError') {
+              console.warn("Audio play failed:", e);
+            }
+          });
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying, currentSongIndex]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  const togglePlay = (e) => {
+    if(e) e.stopPropagation();
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setProgress(audioRef.current.currentTime);
+      setDuration(audioRef.current.duration);
+    }
+  };
+
+  const handleProgressChange = (e) => {
+    if(e) e.stopPropagation();
+    const value = Number(e.target.value);
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
+      setProgress(value);
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    if(e) e.stopPropagation();
+    const value = Number(e.target.value);
+    setVolume(value);
+  };
+
+  const formatTime = (time) => {
+    if (isNaN(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleError = (e) => {
+    console.warn("Audio playback error: Source may be unsupported or blocked.", e);
+    setIsPlaying(false);
+  };
+
+  if (!currentSong || !isPlayerVisible) return null;
+
+  let audioSrc = currentSong.link;
+  try {
+    const urlObj = new URL(currentSong.link);
+    const id = urlObj.searchParams.get('id');
+    if (id) {
+      audioSrc = `/api/audio?id=${id}`;
+    }
+  } catch (err) {
+    // Fallback
+  }
+
+  return (
+    <>
+      <audio 
+        ref={audioRef} 
+        src={audioSrc} 
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={nextSong}
+        onLoadedMetadata={handleTimeUpdate}
+        onError={handleError}
+      />
+      
+      <motion.div 
+        className={styles.playerContainer}
+        initial={{ y: 100, opacity: 0, x: '-50%' }}
+        animate={{ y: 0, opacity: 1, x: '-50%' }}
+        exit={{ y: 100, opacity: 0, x: '-50%' }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div className={styles.songInfo}>
+          <div className={styles.artwork}>
+            <div 
+              className={styles.placeholderArtwork} 
+              style={{ background: `linear-gradient(135deg, ${themeColors.from}, ${themeColors.to})` }}
+            />
+          </div>
+          <div className={styles.details}>
+            <div className={styles.title}>{currentSong.title}</div>
+            <div className={styles.artist}>{currentSong.artist}</div>
+          </div>
+        </div>
+
+        <div className={styles.controlsContainer}>
+          <div className={styles.mainControls}>
+            <button className={styles.iconButton} onClick={prevSong}><SkipBack size={20} /></button>
+            <button className={styles.playButton} onClick={togglePlay}>
+              {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className={styles.playIcon} />}
+            </button>
+            <button className={styles.iconButton} onClick={nextSong}><SkipForward size={20} /></button>
+          </div>
+          <div className={styles.progressContainer}>
+            <span className={styles.timeText}>{formatTime(progress)}</span>
+            <input 
+              type="range" 
+              min={0} 
+              max={duration || 100} 
+              value={progress} 
+              onChange={handleProgressChange}
+              className={styles.progressBar}
+              style={{ '--progress': `${(progress / (duration || 1)) * 100}%` }}
+            />
+            <span className={styles.timeText}>{formatTime(duration)}</span>
+          </div>
+        </div>
+
+        <div className={styles.volumeContainer}>
+          {/* Visualizer when playing in mini mode */}
+          {isPlaying && (
+            <div className={styles.visualizer}>
+              {[1, 2, 3].map(i => <div key={i} className={`${styles.bar} ${styles.animating}`} />)}
+            </div>
+          )}
+          <button 
+            className={`${styles.iconButton} ${styles.closeBtn}`} 
+            onClick={closePlayer} 
+            aria-label="Close Player"
+          >
+            <X size={20} />
+          </button>
+        </div>
+      </motion.div>
+    </>
+  );
+}

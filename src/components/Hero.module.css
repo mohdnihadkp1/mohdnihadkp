@@ -1,0 +1,117 @@
+.heroSection {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 7rem 2rem 4rem; /* 7rem top padding accounts for the fixed navbar */
+}
+
+.canvasContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Let clicks pass through, but three.js pointer still works on document in modern r3f */
+}
+
+/* Ensure the canvas doesn't block scrolling */
+.canvasContainer > div {
+  pointer-events: none !important;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  margin: auto 0; /* Ensures content centers vertically but won't overflow the top padding */
+}
+
+.headline {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.subtext {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryButton {
+  padding: 1rem 2rem;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 600;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.secondaryButton {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.secondaryButton:hover {
+  background-color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6.5rem 1.25rem 3rem;
+    min-height: 100vh;
+  }
+  .content {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    border-radius: 20px;
+  }
+  .actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .primaryButton, .secondaryButton {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}

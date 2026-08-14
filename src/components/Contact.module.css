@@ -1,0 +1,239 @@
+.footerSection {
+  padding: 8rem 2rem 5rem;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.highlight {
+  color: #25D366; /* WhatsApp Green */
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 450px;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.socialLink {
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+  color: var(--text-primary);
+}
+
+.resumeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.resumeBtn:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+}
+
+/* Form Styling */
+.formContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.formCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(40px) saturate(250%);
+  -webkit-backdrop-filter: blur(40px) saturate(250%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.waIcon {
+  color: #25D366;
+}
+
+.formHeader h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.input, .textarea {
+  background-color: rgba(var(--text-primary-rgb), 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.input:focus, .textarea:focus {
+  border-color: #25D366;
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #25D366;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+@media (max-width: 900px) {
+  .contactGrid {
+    gap: 1.5rem;
+  }
+  .formContainer {
+    justify-content: flex-start;
+  }
+  .formCard {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerSection {
+    padding: 4rem 1rem 3rem;
+  }
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .socials {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .socialLink {
+    font-size: 0.8rem;
+  }
+  .resumeBtn {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+  .formCard {
+    padding: 1rem;
+  }
+  .formHeader h3 {
+    font-size: 1rem;
+  }
+  .inputGroup label {
+    font-size: 0.8rem;
+  }
+  .input, .textarea {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .submitBtn {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+}

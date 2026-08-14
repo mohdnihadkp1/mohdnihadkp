@@ -1,0 +1,318 @@
+.bentoSection {
+  padding: 5rem 2rem;
+  background-color: transparent; /* Let ambient background show through */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(300px, auto);
+  gap: 1.5rem;
+}
+
+.bentoCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(48px) saturate(200%);
+  -webkit-backdrop-filter: blur(48px) saturate(200%);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.bentoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.cardContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Grid Specifics */
+/* Card 1 & Video Overlays */
+.card1 {
+  grid-column: span 4;
+  min-height: 400px;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.card2 {
+  grid-column: span 8;
+}
+
+.card3 {
+  padding: 0;
+  min-height: 400px;
+  grid-column: span 12;
+}
+
+.bgImage {
+  z-index: 1;
+  transition: transform 0.6s ease;
+}
+
+.bentoCard:hover .bgImage {
+  transform: scale(1.05);
+}
+
+.overlayGradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cardContentOverlay {
+  position: relative;
+  z-index: 3;
+  padding: 2rem;
+  width: 100%;
+}
+
+.cardTitleOverlay {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Ecosystem List - 2x2 Stylish Grid */
+.ecosystemGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.ecosystemItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.ecosystemItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #1DB954; /* Add a splash of color to icons */
+  width: 28px;
+  height: 28px;
+}
+
+.ecosystemItem h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.ecosystemItem p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Video Styles (Live Playing Feel) */
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.playingVideoImage {
+  z-index: 1;
+  animation: slowPan 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowPan {
+  0% { transform: scale(1.1) translate(2%, 2%); }
+  100% { transform: scale(1.1) translate(-2%, -2%); }
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0,0,0,0.1) 50%,
+    rgba(0,0,0,0.1)
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.videoContentOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.videoTitleOverlay {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+.liveBadge {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.pulsingDot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444; /* Red dot for LIVE */
+  border-radius: 50%;
+  animation: pulseRed 2s infinite;
+}
+
+@keyframes pulseRed {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@media (max-width: 900px) {
+  /* Tablet layout: 2 columns */
+  .card1, .card2 {
+    grid-column: span 6;
+  }
+  .card3 {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 768px) {
+  .card1, .card2, .card3 {
+    grid-column: span 12; /* Stack everything on mobile */
+  }
+  .bentoSection {
+    padding: 2.5rem 1rem;
+  }
+  .grid {
+    gap: 0.75rem;
+  }
+  .bentoCard {
+    border-radius: 16px;
+    padding: 1.25rem;
+  }
+  .cardContent {
+    padding: 0;
+  }
+  .cardTitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .photoContainer {
+    height: 160px; /* Reduce photo height */
+    border-radius: 8px;
+  }
+  .ecosystemGrid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem; /* Space for scrollbar */
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar for cleaner look */
+    scrollbar-width: none; 
+    margin-right: -1.25rem; /* Bleed to edge */
+    padding-right: 1.25rem;
+  }
+  .ecosystemGrid::-webkit-scrollbar {
+    display: none;
+  }
+  .ecosystemItem {
+    flex-direction: column; /* Stack icon and text */
+    gap: 0.5rem;
+    align-items: flex-start;
+    min-width: 240px; /* Fixed width for swipeable cards */
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .ecosystemItem h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  .ecosystemItem p {
+    font-size: 0.8rem;
+  }
+  .videoContainer {
+    min-height: 220px;
+    margin-top: 1rem;
+  }
+}
