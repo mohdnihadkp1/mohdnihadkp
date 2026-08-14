@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useMusicStore } from '../store/musicStore';
 import styles from './AudioPlayer.module.css';
-import { Play, Pause, SkipBack, SkipForward, ChevronDown, ListMusic, X } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, ChevronDown, ListMusic, X, Share2, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AudioPlayer() {
@@ -13,6 +13,7 @@ export default function AudioPlayer() {
   const [duration, setDuration] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   
   const currentSong = songs[currentSongIndex];
 
@@ -27,6 +28,26 @@ export default function AudioPlayer() {
     const color2 = `hsl(${(Math.abs(hash) + 60) % 360}, 80%, 30%)`;
     return { from: color1, to: color2 };
   }, [currentSong]);
+
+  // Sync current song to URL for easy sharing
+  useEffect(() => {
+    if (currentSong && typeof window !== 'undefined') {
+      const url = new URL(window.location);
+      url.searchParams.set('song', currentSong.id);
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, [currentSong]);
+
+  // Handle Android Back Button / Swipe Back to close player
+  useEffect(() => {
+    const handlePopState = () => {
+      if (isExpanded) {
+        setIsExpanded(false);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isExpanded]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -92,6 +113,27 @@ export default function AudioPlayer() {
   const handleContainerClick = () => {
     if (!isExpanded) {
       setIsExpanded(true);
+      // Push state so physical back button closes the modal
+      if (typeof window !== 'undefined') {
+        window.history.pushState({ playerOpen: true }, '');
+      }
+    }
+  };
+
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setIsExpanded(false);
+    if (typeof window !== 'undefined' && window.history.state?.playerOpen) {
+      window.history.back();
+    }
+  };
+
+  const handleShare = (e) => {
+    e.stopPropagation();
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
     }
   };
 
@@ -202,12 +244,21 @@ export default function AudioPlayer() {
                 <div className={styles.topNav}>
                   <button 
                     className={styles.closeButton} 
-                    onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }}
+                    onClick={handleClose}
+                    title="Close"
                   >
-                    <ChevronDown size={28} />
+                    <X size={28} />
                   </button>
                   <span className={styles.nowPlayingText}>Now Playing</span>
-                  <div style={{ width: '48px' }}></div> {/* Spacer */}
+                  
+                  {/* Share Button */}
+                  <button 
+                    className={styles.shareButton} 
+                    onClick={handleShare}
+                    title="Copy Link"
+                  >
+                    {showToast ? <Check size={24} color="#1DB954" /> : <Share2 size={24} />}
+                  </button>
                 </div>
 
                 {/* Main Content */}
